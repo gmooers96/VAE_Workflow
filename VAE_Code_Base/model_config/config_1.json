@@ -1,0 +1,83 @@
+{
+    "id": 1,
+    "optimizer": {
+        "lr": 1e-4
+    }, 
+    "kl_weight": 0.0025,
+    "annealing": true,
+    "data": {
+        "training_data_path": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Big_Randomized_Trackable/Multi_Sim_Randomized_Space_Time_W_Training.npy",
+        "test_data_path": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Big_Randomized_Trackable/Multi_Sim_Randomized_Space_Time_W_Test.npy",
+        "train_labels": "/fast/gmooers/Preprocessed_Data/Centered_50_50/Y_Train.npy",
+        "test_labels": "/fast/gmooers/Preprocessed_Data/Centered_50_50/Improved_Y_Test.npy",
+        "max_scalar": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Big_Randomized_Trackable/Multi_Sim_Randomized_Space_Time_Max_Scalar.npy",
+        "min_scalar": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Big_Randomized_Trackable/Multi_Sim_Randomized_Space_Time_Min_Scalar.npy"
+    },
+    "encoder": {
+        "activation": "relu",
+        "latent_dim": 1024,
+        "conv_1": {
+            "filter_num": 64,
+            "kernel_size": [3, 3],
+            "stride": 2
+        },
+        "conv_2": {
+            "filter_num": 128,
+            "kernel_size": [3, 3],
+            "stride": 2
+        },
+        "conv_3": {
+            "filter_num": 512,
+            "kernel_size": [3, 3],
+            "stride": 2
+        },
+        "conv_mu": {
+            "filter_num": 64,
+            "kernel_size": [3, 3],
+            "stride": 2
+        }, 
+        "conv_log_var": {
+            "filter_num": 64,
+            "kernel_size": [3, 3],
+            "stride": 2
+        }
+    },
+    "decoder": {
+        "latent_dim": 1024,
+        "activation": "relu",
+        "latent_reshape":{
+            "dim_1":2,
+            "dim_2":8,
+            "dim_3":64
+        },
+        "conv_t_0": {
+            "filter_num": 1024,
+            "kernel_size": [3, 3],
+            "stride": 2
+        },
+        "conv_t_1": {
+            "filter_num": 256,
+            "kernel_size": [3, 3],
+            "stride": 2
+        },
+        "conv_t_2": {
+            "filter_num": 64,
+            "kernel_size": [3, 3],
+            "stride": 2
+        },
+        "conv_mu": {
+            "filter_num": 1,
+            "kernel_size": [3, 3],
+            "stride": 2,
+            "activation": "sigmoid"
+        },
+        "conv_log_var": {
+            "filter_num": 1,
+            "kernel_size": [3, 3],
+            "stride": 2,
+            "activation": "linear"
+        }
+    },
+    "batch_size": 128,
+    "train_epochs": 1600
+}

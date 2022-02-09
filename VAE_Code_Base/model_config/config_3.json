@@ -1,0 +1,101 @@
+{
+    "id": 3,
+    "optimizer": {
+        "lr": 1e-4
+    }, 
+    "kl_weight": 0.0025,
+    "annealing": true,
+    "data": {
+        "training_data_path": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Centered_50_50/Space_Time_W_Training.npy",
+
+        
+        "training_data_path_T": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/T_Variable/Space_Time_Anon_T_Training.npy",
+        
+        "training_data_path_Q": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/Q_Variable/Space_Time_Anon_Q_Training.npy",
+        
+        "training_data_path_W": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/W_Variable/Space_Time_W_Training.npy",
+        
+        "test_data_path_T" : "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/T_Variable/Space_Time_Anon_T_Test.npy",
+        
+        "test_data_path_Q" : "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/Q_Variable/Space_Time_Anon_Q_Test.npy",
+        
+         "test_data_path_W" : "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/W_Variable/Space_Time_W_Test.npy",
+        
+        "train_labels": "/Preprocessed_Data/Centered_50_50/Y_Train.npy",
+        "test_labels": "/Preprocessed_Data/Centered_50_50/Improved_Y_Test.npy",
+        "max_scalar_t": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/T_Variable/Space_Time_Anon_Max_Scalar.npy",
+        "min_scalar_t": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/T_Variable/Space_Time_Anon_Min_Scalar.npy",
+         "max_scalar_q": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/Q_Variable/Space_Time_Anon_Max_Scalar.npy",
+        "min_scalar_q": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/Q_Variable/Space_Time_Anon_Min_Scalar.npy",
+         "max_scalar_w": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/W_Variable/Space_Time_Max_Scalar.npy",
+        "min_scalar_w": "/expanse/lustre/projects/sio134/gmooers/CBRAIN-CAM/MAPS/Preprocessed_Data/Trackable_Data/W_Variable/Space_Time_Min_Scalar.npy"
+    },
+    "encoder": {
+        "activation": "relu",
+        "latent_dim": 1024,
+        "conv_1": {
+            "filter_num": 64,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        },
+        "conv_2": {
+            "filter_num": 128,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        },
+        "conv_3": {
+            "filter_num": 512,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        },
+        "conv_mu": {
+            "filter_num": 64,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        }, 
+        "conv_log_var": {
+            "filter_num": 64,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        }
+    },
+    "decoder": {
+        "latent_dim": 1024,
+        "activation": "relu",
+        "latent_reshape":{
+            "dim_1":2,
+            "dim_2":8,
+            "dim_3":1,
+            "dim_4":64
+        },
+        "conv_t_0": {
+            "filter_num": 1024,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        },
+        "conv_t_1": {
+            "filter_num": 256,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        },
+        "conv_t_2": {
+            "filter_num": 64,
+            "kernel_size": [3, 3, 3],
+            "stride": 2
+        },
+        "conv_mu": {
+            "filter_num": 1,
+            "kernel_size": [3, 3, 3],
+            "stride": 2,
+            "activation": "sigmoid"
+        },
+        "conv_log_var": {
+            "filter_num": 1,
+            "kernel_size": [3, 3, 3],
+            "stride": 2,
+            "activation": "linear"
+        }
+    },
+    "batch_size": 128,
+    "train_epochs": 400
+}
